@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Curso;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CursoFactory extends Factory
 {
@@ -21,11 +22,14 @@ class CursoFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->sentence();
         //aqui definimos todos los campos que tiene mi tabla
         return [
-            'name' => $this->faker->sentence(),
+            'name' => $name,
+            'slug' => Str::slug($name,'-'), // helper que rellana los espacios segun los parametros que le ingresemos
             'descripcion' => $this->faker->paragraph(), 
-            'categoria' => $this->faker->randomElement(["Desarrollo web" ,"Diseño web"])
+            'categoria' => $this->faker->randomElement(["Desarrollo web" ,"Diseño web"]),
         ];
     }
 }
+ 
